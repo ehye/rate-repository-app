@@ -1,6 +1,9 @@
 import { Text, View, Image } from 'react-native'
 import theme from '../theme'
 
+const roundCount = (count) =>
+  count >= 1000 ? (Math.round(count / 100) / 10).toString() + 'K' : count
+
 const RepositoryItem = ({ item }) => (
   <View key={item.id} style={{ flexDirection: 'column', rowGap: 5 }}>
     <View style={{ flexDirection: 'column' }}>
@@ -27,10 +30,10 @@ const RepositoryItem = ({ item }) => (
       </View>
     </View>
     <View style={{ flexDirection: 'row' }}>
-      <Text>Stars: {item.stargazersCount} </Text>
-      <Text>Forks: {item.forksCount} </Text>
-      <Text>Reviews: {item.reviewCount} </Text>
-      <Text>Rating: {item.ratingAverage} </Text>
+      <Text>Stars: {roundCount(item.stargazersCount)} </Text>
+      <Text>Forks: {roundCount(item.forksCount)} </Text>
+      <Text>Reviews: {roundCount(item.reviewCount)} </Text>
+      <Text>Rating: {roundCount(item.ratingAverage)} </Text>
     </View>
   </View>
 )
