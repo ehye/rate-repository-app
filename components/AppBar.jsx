@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from 'react-native'
+import { ScrollView, StyleSheet, Text } from 'react-native'
 import { Link } from 'react-router-native'
 
 import Constants from 'expo-constants'
@@ -8,23 +8,24 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   flexContainer: {
-    flexDirection: 'row',
-    paddingTop: Constants.statusBarHeight,
-    alignSelf: 'stretch',
+    // flex: 1,
+    // flexDirection: 'row',
+    // paddingTop: Constants.statusBarHeight,
+    // alignSelf: 'stretch',
     backgroundColor: '#24292e',
   },
 })
 
 const AppBar = () => {
   return (
-    <View style={styles.flexContainer}>
+    <ScrollView horizontal style={styles.flexContainer}>
       <Link to="/">
         <Text style={{ color: 'white' }}>Repository</Text>
       </Link>
-      <Link to="/signin">
+      <Link to="/signIn">
         <Text style={{ color: 'white' }}>Sign In</Text>
       </Link>
-    </View>
+    </ScrollView>
   )
 }
 
