@@ -1,4 +1,6 @@
 import { View, StyleSheet, Text } from 'react-native'
+import { Link } from 'react-router-native'
+
 import Constants from 'expo-constants'
 
 const styles = StyleSheet.create({
@@ -6,16 +8,22 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
   flexContainer: {
+    flexDirection: 'row',
     paddingTop: Constants.statusBarHeight,
     alignSelf: 'stretch',
     backgroundColor: '#24292e',
   },
 })
 
-const AppBar = ({ children }) => {
+const AppBar = () => {
   return (
     <View style={styles.flexContainer}>
-      <Text style={{ color: 'white' }}>{children}</Text>
+      <Link to="/">
+        <Text style={{ color: 'white' }}>Repository</Text>
+      </Link>
+      <Link to="/signin">
+        <Text style={{ color: 'white' }}>Sign In</Text>
+      </Link>
     </View>
   )
 }
