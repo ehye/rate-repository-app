@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
-import { NativeRouter } from 'react-router-native'
-import { Route, Routes, Navigate } from 'react-router-native'
-import { StyleSheet, View } from 'react-native'
+import { Route, Routes, Navigate, NativeRouter } from 'react-router-native'
+import { Platform, StyleSheet, View } from 'react-native'
 import RepositoryList from './components/RepositoryList'
 import AppBar from './components/AppBar'
 import SignIn from './components/SignIn'
@@ -10,6 +9,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Arial ',
   },
 })
 
