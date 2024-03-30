@@ -33,4 +33,10 @@ export const GET_REPOSITORIES = gql`
   }
 `
 
-// other queries...
+export const SIGN_IN = gql`
+  mutation ($authenticateCredentials: AuthenticateInput) {
+    authenticate(credentials: $authenticateCredentials) {
+      accessToken
+    }
+  }
+`
