@@ -6,6 +6,29 @@ import createApolloClient from './src/utils/apolloClient'
 import RepositoryList from './src/components/RepositoryList'
 import AppBar from './src/components/AppBar'
 import SignIn from './src/components/SignIn'
+import AuthStorage from './src/utils/authStorage'
+import AuthStorageContext from './src/contexts/AuthStorageContext'
+
+const authStorage = new AuthStorage()
+const apolloClient = createApolloClient(authStorage)
+
+const App = () => (
+  <View style={styles.container}>
+    <NativeRouter>
+      <ApolloProvider client={apolloClient}>
+        <AuthStorageContext.Provider value={authStorage}>
+          <AppBar style={{ flex: 1 }} />
+          <Routes style={{ flex: 10 }}>
+            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/" element={<RepositoryList />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </AuthStorageContext.Provider>
+      </ApolloProvider>
+    </NativeRouter>
+    <StatusBar style="auto" />
+  </View>
+)
 
 const styles = StyleSheet.create({
   container: {
@@ -14,23 +37,5 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Arial ',
   },
 })
-
-const apolloClient = createApolloClient()
-
-const App = () => (
-  <View style={styles.container}>
-    <NativeRouter>
-      <ApolloProvider client={apolloClient}>
-        <AppBar style={{ flex: 1 }} />
-        <Routes style={{ flex: 10 }}>
-          <Route path="/signIn" element={<SignIn />} />
-          <Route path="/" element={<RepositoryList />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </ApolloProvider>
-    </NativeRouter>
-    <StatusBar style="auto" />
-  </View>
-)
 
 export default App

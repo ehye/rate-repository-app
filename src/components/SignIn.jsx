@@ -11,18 +11,18 @@ const SignIn = () => {
   })
 
   const initialValues = {
-    username: '',
-    password: '',
+    username: 'kalle',
+    password: 'password',
   }
 
   const [signIn] = useSignIn()
   
   const onSubmit = async (values) => {
-    console.log(values)
+    // console.log(values)
     const { username, password } = values
 
     try {
-      const { data } = await signIn({ username, password })
+      const { data, } = await signIn({ username, password })
       console.log(data)
     } catch (e) {
       console.log(e)
