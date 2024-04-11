@@ -1,11 +1,9 @@
 import { Text, View, Image } from 'react-native'
 import theme from '../theme'
-
-const roundCount = (count) =>
-  count >= 1000 ? (Math.round(count / 100) / 10).toString() + 'K' : count
+import { roundCount } from '../utils/helper.js'
 
 const RepositoryItem = ({ item }) => (
-  <View key={item.id} style={{ flexDirection: 'column', rowGap: 5 }}>
+  <View testID='repositoryItem' key={item.id} style={{ flexDirection: 'column', rowGap: 5 }}>
     <View style={{ flexDirection: 'column' }}>
       <Image
         style={{ width: 50, height: 50, flex: 0.3 }}
