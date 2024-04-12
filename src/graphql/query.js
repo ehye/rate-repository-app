@@ -37,21 +37,30 @@ export const GET_REPOSITORY = gql`
   query Repository($repositoryId: ID!) {
     repository(id: $repositoryId) {
       id
-      ownerName
-      name
-      createdAt
       fullName
+      url
+      name
+      ownerAvatarUrl
       ratingAverage
       reviewCount
       stargazersCount
-      watchersCount
-      forksCount
-      openIssuesCount
-      url
-      ownerAvatarUrl
       description
+      forksCount
       language
-      userHasReviewed
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 `
