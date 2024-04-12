@@ -1,8 +1,10 @@
+const primary = '#0366d6'
+
 const theme = {
   colors: {
     textPrimary: '#24292e',
     textSecondary: '#586069',
-    primary: '#0366d6',
+    primary: primary,
   },
   fontSizes: {
     body: 14,
@@ -22,6 +24,14 @@ const theme = {
     flexGrow: 1,
     padding: 15,
     margin: 15,
+    borderRadius: 5,
+  },
+  inputText: {
+    flexGrow: 1,
+    padding: 15,
+    margin: 15,
+    borderWidth: 2,
+    borderColor: primary,
     borderRadius: 5,
   },
 }
