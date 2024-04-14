@@ -1,35 +1,14 @@
-import {
-  FlatList,
-  Text,
-  View,
-  Pressable,
-  Linking,
-  StyleSheet,
-} from 'react-native'
+import { FlatList, Text, View, Pressable, Linking } from 'react-native'
 import { useParams } from 'react-router-dom'
 import { format, parseISO } from 'date-fns'
 import useRepository from '../hooks/useRepository'
 import RepositoryInfo from './RepositoryInfo'
 import theme from '../theme'
 
-const styles = StyleSheet.create({
-  rating: {
-    borderColor: theme.colors.primary,
-    width: '50px',
-    height: '50px',
-    borderWidth: 2,
-    borderRadius: 25,
-    marginTop: '10px',
-    marginHorizontal: '20px',
-    padding: '11px',
-    alignItems: 'center',
-  },
-})
-
 const ReviewItem = ({ review }) => {
   return (
     <View style={{ flexDirection: 'row', marginTop: '20px' }}>
-      <Text style={styles.rating}>{review.rating}</Text>
+      <Text style={theme.rating}>{review.rating}</Text>
       <View style={{ flexDirection: 'column', width: '75%' }}>
         <Text
           style={{ fontWeight: 'bold', marginBottom: '5px' }}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Text, TextInput, Pressable, View } from 'react-native'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import useReview from '../hooks/useReview'
+import useCreateReview from '../hooks/useCreateReview'
 import theme from '../theme'
 
 const CreateReviewContainer = ({ onSubmit }) => {
@@ -78,12 +78,12 @@ const CreateReviewContainer = ({ onSubmit }) => {
 }
 
 const CreateReview = () => {
-  const [review] = useReview()
+  const [createReview] = useCreateReview()
   const [error, setError] = useState('')
 
   const onSubmit = async (values) => {
     try {
-      const { data } = await review({ ...values })
+      const { data } = await createReview({ ...values })
       console.log(data)
     } catch (e) {
       setError(e)

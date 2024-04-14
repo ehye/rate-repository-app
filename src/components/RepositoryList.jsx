@@ -1,19 +1,12 @@
 import React, { useState } from 'react'
-import { TextInput, FlatList, View, StyleSheet } from 'react-native'
+import { TextInput, FlatList, View } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import useRepositories from '../hooks/useRepositories'
 import RepositoryInfo from './RepositoryInfo'
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-    backgroundColor: '#e1e5e8',
-  },
-})
+import { ItemSeparator } from './ItemSeparator'
 
 export class RepositoryListContainer extends React.Component {
   renderHeader = () => {
-    console.log(this.props)
     const order = this.props.order
     const setOrder = this.props.setOrder
     const searchKeyword = this.props.searchKeyword
@@ -52,8 +45,6 @@ export class RepositoryListContainer extends React.Component {
     const repositoryNodes = repositories
       ? repositories.edges.map((edge) => edge.node)
       : []
-
-    const ItemSeparator = () => <View style={styles.separator} />
 
     return (
       <View>

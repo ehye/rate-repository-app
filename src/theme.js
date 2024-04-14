@@ -38,6 +38,21 @@ const theme = {
     color: '#d73a4a',
     marginLeft: '30px',
   },
+  rating: {
+    borderColor: primary,
+    width: '50px',
+    height: '50px',
+    borderWidth: 2,
+    borderRadius: 25,
+    marginTop: '10px',
+    marginHorizontal: '20px',
+    padding: '11px',
+    alignItems: 'center',
+  },
+  separator: {
+    height: 10,
+    backgroundColor: '#e1e5e8',
+  },
 }
 
 export default theme

@@ -1,11 +1,11 @@
 import { useMutation, useApolloClient } from '@apollo/client'
 import { CREATE_REVIEW } from '../graphql/mutation'
 
-const useReview = () => {
+const useCreateReview = () => {
   const apolloClient = useApolloClient()
   const [mutate, result] = useMutation(CREATE_REVIEW)
 
-  const review = async ({ ownerName, repoName, rating, review }) => {
+  const createReview = async ({ ownerName, repoName, rating, review }) => {
     const response = await mutate({
       variables: {
         ownerName: ownerName,
@@ -18,7 +18,7 @@ const useReview = () => {
     return response
   }
 
-  return [review, result]
+  return [createReview, result]
 }
 
-export default useReview
+export default useCreateReview

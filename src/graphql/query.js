@@ -81,11 +81,29 @@ export const SIGN_IN = gql`
   }
 `
 
-export const ME = gql`
-  query Me {
+export const GET_CURRENT_USER = gql`
+  query ($includeReviews: Boolean = false) {
     me {
       id
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            id
+            repositoryId
+            rating
+            createdAt
+            text
+            repository {
+              name
+            }
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
 `

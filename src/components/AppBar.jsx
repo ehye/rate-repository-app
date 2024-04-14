@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, Pressable } from 'react-native'
 import { Link } from 'react-router-native'
 import Constants from 'expo-constants'
 import useAuthStorage from '../hooks/useAuthStorage'
-import { ME } from '../graphql/query'
+import { GET_CURRENT_USER } from '../graphql/query'
 import { useQuery, useApolloClient } from '@apollo/client'
 
 const styles = StyleSheet.create({
@@ -31,7 +31,7 @@ const AppBar = () => {
     await apolloClient.resetStore()
   }
 
-  const { data, loading } = useQuery(ME, {
+  const { data, loading } = useQuery(GET_CURRENT_USER, {
     fetchPolicy: 'cache-and-network',
   })
 
@@ -39,7 +39,7 @@ const AppBar = () => {
     return 'Loading...'
   }
 
-  if (data.me == null) {
+  if (data == null) {
     return (
       <ScrollView horizontal style={styles.flexContainer}>
         <Link to="/">
@@ -61,6 +61,9 @@ const AppBar = () => {
         </Link>
         <Link to="/create-review">
           <Text style={styles.barLink}>Create a review</Text>
+        </Link>
+        <Link to="/my-review">
+          <Text style={styles.barLink}>My reviews</Text>
         </Link>
         <Pressable onPress={handleSignOut}>
           <Text style={styles.barLink}>Sign Out</Text>
