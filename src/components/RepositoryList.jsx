@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { FlatList, View, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { TextInput, FlatList, View, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import useRepositories from '../hooks/useRepositories'
 import RepositoryInfo from './RepositoryInfo'
@@ -11,35 +11,61 @@ const styles = StyleSheet.create({
   },
 })
 
-export const RepositoryListContainer = ({ order, setOrder, repositories }) => {
-  // Get the nodes from the edges array
-  const repositoryNodes = repositories
-    ? repositories.edges.map((edge) => edge.node)
-    : []
+export class RepositoryListContainer extends React.Component {
+  renderHeader = () => {
+    console.log(this.props)
+    const order = this.props.order
+    const setOrder = this.props.setOrder
+    const searchKeyword = this.props.searchKeyword
+    const setSearchKeyword = this.props.setSearchKeyword
 
-  const ItemSeparator = () => <View style={styles.separator} />
-
-  const OrderingOpt = () => (
-    <View>
-      <Picker
-        selectedValue={order}
-        onValueChange={(itemValue) => setOrder(itemValue)}
+    return (
+      <View
+        style={{
+          margin: 10,
+        }}
       >
-        <Picker.Item label="Latest repositories" value="latest" />
-        <Picker.Item label="Highest rated repositories" value="highestRated" />
-        <Picker.Item label="Lowest rated repositories" value="lowestRated" />
-      </Picker>
-    </View>
-  )
+        <TextInput
+          placeholder="Search"
+          onChangeText={(query) => setSearchKeyword(query)}
+          value={searchKeyword}
+        />
+        <Picker
+          selectedValue={order}
+          onValueChange={(itemValue) => setOrder(itemValue)}
+        >
+          <Picker.Item label="Latest repositories" value="latest" />
+          <Picker.Item
+            label="Highest rated repositories"
+            value="highestRated"
+          />
+          <Picker.Item label="Lowest rated repositories" value="lowestRated" />
+        </Picker>
+      </View>
+    )
+  }
 
-  return (
-    <FlatList
-      ListHeaderComponent={OrderingOpt}
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <RepositoryInfo item={item} />}
-    />
-  )
+  render() {
+    const repositories = this.props.repositories
+
+    // Get the nodes from the edges array
+    const repositoryNodes = repositories
+      ? repositories.edges.map((edge) => edge.node)
+      : []
+
+    const ItemSeparator = () => <View style={styles.separator} />
+
+    return (
+      <View>
+        <FlatList
+          ListHeaderComponent={this.renderHeader}
+          data={repositoryNodes}
+          ItemSeparatorComponent={ItemSeparator}
+          renderItem={({ item }) => <RepositoryInfo item={item} />}
+        />
+      </View>
+    )
+  }
 }
 
 function setOrderOpts(order) {
@@ -56,14 +82,20 @@ function setOrderOpts(order) {
 }
 
 const RepositoryList = () => {
+  const [searchKeyword, setSearchKeyword] = useState('')
   const [order, setOrder] = useState('')
-  const { repositories } = useRepositories(setOrderOpts(order))
+  const { repositories } = useRepositories({
+    ...setOrderOpts(order),
+    searchKeyword,
+  })
 
   return (
     <RepositoryListContainer
       repositories={repositories}
       order={order}
       setOrder={setOrder}
+      searchKeyword={searchKeyword}
+      setSearchKeyword={setSearchKeyword}
     />
   )
 }

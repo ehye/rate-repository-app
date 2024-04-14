@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_REPOSITORIES } from '../graphql/query'
 
-const useRepositories = ({orderBy, orderDirection}) => {
+const useRepositories = ({ orderBy, orderDirection, searchKeyword }) => {
   const [repositories, setRepositories] = useState()
   const { data, loading } = useQuery(GET_REPOSITORIES, {
     variables: {
       orderBy,
       orderDirection,
+      searchKeyword,
     },
     fetchPolicy: 'cache-and-network',
   })
