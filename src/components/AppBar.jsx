@@ -48,6 +48,9 @@ const AppBar = () => {
         <Link to="/sign-in">
           <Text style={styles.barLink}>Sign In</Text>
         </Link>
+        <Link to="/sign-up">
+          <Text style={styles.barLink}>Sign Up</Text>
+        </Link>
       </ScrollView>
     )
   } else {

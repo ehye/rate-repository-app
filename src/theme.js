@@ -34,6 +34,10 @@ const theme = {
     borderColor: primary,
     borderRadius: 5,
   },
+  inputError: {
+    color: '#d73a4a',
+    marginLeft: '30px',
+  },
 }
 
 export default theme
