@@ -55,7 +55,6 @@ const SingleRepository = () => {
     const reviewNodes = item.reviews
       ? item.reviews.edges.map((edge) => edge.node)
       : []
-    console.log(reviewNodes)
 
     return (
       <View>

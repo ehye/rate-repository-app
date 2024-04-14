@@ -1,16 +1,9 @@
 import { useState } from 'react'
-import { Text, TextInput, Pressable, View, StyleSheet } from 'react-native'
+import { Text, TextInput, Pressable, View } from 'react-native'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import useReview from '../hooks/useReview'
 import theme from '../theme'
-
-const styles = StyleSheet.create({
-  error: {
-    color: '#d73a4a',
-    marginLeft: '30px',
-  },
-})
 
 const CreateReviewContainer = ({ onSubmit }) => {
   const validationSchema = yup.object().shape({
@@ -47,7 +40,7 @@ const CreateReviewContainer = ({ onSubmit }) => {
         onChangeText={formik.handleChange('ownerName')}
       />
       {formik.touched.ownerName && formik.errors.ownerName && (
-        <Text style={styles.error}>{formik.errors.ownerName}</Text>
+        <Text style={theme.inputError}>{formik.errors.ownerName}</Text>
       )}
       <TextInput
         placeholder="Repository name"
@@ -56,7 +49,7 @@ const CreateReviewContainer = ({ onSubmit }) => {
         onChangeText={formik.handleChange('repoName')}
       />
       {formik.touched.repoName && formik.errors.repoName && (
-        <Text style={styles.error}>{formik.errors.repoName}</Text>
+        <Text style={theme.inputError}>{formik.errors.repoName}</Text>
       )}
 
       <TextInput
@@ -66,7 +59,7 @@ const CreateReviewContainer = ({ onSubmit }) => {
         onChangeText={formik.handleChange('rating')}
       />
       {formik.touched.rating && formik.errors.rating && (
-        <Text style={styles.error}>{formik.errors.rating}</Text>
+        <Text style={theme.inputError}>{formik.errors.rating}</Text>
       )}
 
       <TextInput
@@ -105,7 +98,7 @@ const CreateReview = () => {
     <View>
       <CreateReviewContainer onSubmit={onSubmit} />
       <View>
-        <Text>{error.message}</Text>
+        <Text style={theme.inputError}>{error.message}</Text>
       </View>
     </View>
   )

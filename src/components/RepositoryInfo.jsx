@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     alignSelf: 'flex-start',
     borderRadius: 4,
-    padding: '0 4px 2px 0',
+    marginVertical: '1px',
+    padding: '2px',
   },
 })
 
@@ -32,13 +33,15 @@ const RepositoryInfo = ({ item }) => {
           resizeMode={'cover'}
           source={{ uri: item.ownerAvatarUrl }}
         />
-        <View style={{ flexDirection: 'column' }}>
+        <View style={{ flexDirection: 'column', width: '85%' }}>
           <Pressable onPress={() => onPress(item.id)}>
-            <Text style={{ fontWeight: 'bold' }}>{item.fullName}</Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ fontWeight: 'bold' }}>{item.fullName}</Text>
+              <Text style={{ marginLeft: '10px' }}>
+                <span style={styles.languageTag}>{item.language}</span>
+              </Text>
+            </View>
             <Text>{item.description}</Text>
-            <Text>
-              <span style={styles.languageTag}>{item.language}</span>
-            </Text>
           </Pressable>
         </View>
       </View>
