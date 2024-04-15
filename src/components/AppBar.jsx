@@ -8,15 +8,13 @@ import { useQuery, useApolloClient } from '@apollo/client'
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-  },
-  flexContainer: {
     backgroundColor: '#24292e',
-    paddingTop: '30px',
     paddingBottom: '20px',
     paddingHorizontal: '10px',
   },
   barLink: {
     color: 'white',
+    fontSize: 24,
     marginRight: '10px',
   },
 })
@@ -26,7 +24,6 @@ const AppBar = () => {
   const apolloClient = useApolloClient()
 
   const handleSignOut = async () => {
-    console.log('sign out')
     await authStorage.removeAccessToken()
     await apolloClient.resetStore()
   }
@@ -36,12 +33,12 @@ const AppBar = () => {
   })
 
   if (loading) {
-    return 'Loading...'
+    return <Text>Loading...</Text>
   }
 
   if (data == null) {
     return (
-      <ScrollView horizontal style={styles.flexContainer}>
+      <ScrollView horizontal style={styles.container}>
         <Link to="/">
           <Text style={styles.barLink}>Repository</Text>
         </Link>
@@ -55,7 +52,7 @@ const AppBar = () => {
     )
   } else {
     return (
-      <ScrollView horizontal style={styles.flexContainer}>
+      <ScrollView horizontal style={styles.container}>
         <Link to="/">
           <Text style={styles.barLink}>Repository</Text>
         </Link>

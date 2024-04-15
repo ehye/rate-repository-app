@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     alignSelf: 'flex-start',
     borderRadius: 4,
+    marginLeft: '10px',
     marginVertical: '1px',
     padding: '2px',
   },
@@ -37,9 +38,7 @@ const RepositoryInfo = ({ item }) => {
           <Pressable onPress={() => onPress(item.id)}>
             <View style={{ flexDirection: 'row' }}>
               <Text style={{ fontWeight: 'bold' }}>{item.fullName}</Text>
-              <Text style={{ marginLeft: '10px' }}>
-                <span style={styles.languageTag}>{item.language}</span>
-              </Text>
+              <Text style={styles.languageTag}>{item.language}</Text>
             </View>
             <Text>{item.description}</Text>
           </Pressable>

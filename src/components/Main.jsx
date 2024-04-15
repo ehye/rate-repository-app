@@ -1,5 +1,6 @@
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Route, Routes, Navigate } from 'react-router-native'
+import Constants from 'expo-constants'
 
 import RepositoryList from './RepositoryList'
 import SignIn from './SignIn'
@@ -9,11 +10,17 @@ import SingleRepository from './SingleRepository'
 import CreateReview from './CreateReview'
 import MyReview from './MyReview'
 
+const styles = StyleSheet.create({
+  container: {
+    marginTop: Constants.statusBarHeight,
+  },
+})
+
 const Main = () => {
   return (
-    <View>
-      <AppBar style={{ flex: 1 }} />
-      <Routes style={{ flex: 10 }}>
+    <View style={styles.container}>
+      <AppBar />
+      <Routes>
         <Route path="/" element={<RepositoryList />} />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/sign-in" element={<SignIn />} />

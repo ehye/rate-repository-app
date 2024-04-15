@@ -27,7 +27,7 @@ const SingleRepository = () => {
   const { id } = useParams()
   const { repository: item } = useRepository(id)
   if (!item) {
-    return 'Loading...'
+    return <Text>Loading...</Text>
   } else {
     const showGithubButton = item.url === '' ? false : true
 
@@ -48,9 +48,7 @@ const SingleRepository = () => {
             style={theme.button}
             onPress={() => Linking.openURL(item.url)}
           >
-            <Text>
-              <span style={{ color: '#ffffff' }}>Open in GitHub</span>
-            </Text>
+            <Text style={{ color: '#ffffff' }}>Open in GitHub</Text>
           </Pressable>
         )}
       </View>
