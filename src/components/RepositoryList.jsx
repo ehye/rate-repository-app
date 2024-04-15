@@ -39,11 +39,11 @@ export class RepositoryListContainer extends React.Component {
   }
 
   render() {
-    const repositories = this.props.repositories
+    const onEndReach = this.props.onEndReach
 
     // Get the nodes from the edges array
-    const repositoryNodes = repositories
-      ? repositories.edges.map((edge) => edge.node)
+    const repositoryNodes = this.props.repositories
+      ? this.props.repositories.edges.map((edge) => edge.node)
       : []
 
     return (
@@ -53,32 +53,26 @@ export class RepositoryListContainer extends React.Component {
           data={repositoryNodes}
           ItemSeparatorComponent={ItemSeparator}
           renderItem={({ item }) => <RepositoryInfo item={item} />}
+          onEndReached={onEndReach}
+          onEndReachedThreshold={0.5}
         />
       </View>
     )
   }
 }
 
-function setOrderOpts(order) {
-  switch (order) {
-    case 'latest':
-      return { orderBy: 'CREATED_AT', orderDirection: 'DESC' }
-    case 'highestRated':
-      return { orderBy: 'RATING_AVERAGE', orderDirection: 'DESC' }
-    case 'lowestRated':
-      return { orderBy: 'RATING_AVERAGE', orderDirection: 'ASC' }
-    default:
-      return { orderBy: 'CREATED_AT', orderDirection: 'DESC' }
-  }
-}
-
 const RepositoryList = () => {
   const [searchKeyword, setSearchKeyword] = useState('')
   const [order, setOrder] = useState('')
-  const { repositories } = useRepositories({
-    ...setOrderOpts(order),
+  const { repositories, fetchMore } = useRepositories({
+    first: 7,
+    order,
     searchKeyword,
   })
+  const onEndReach = () => {
+    // console.log('You have reached the end of the list')
+    fetchMore()
+  }
 
   return (
     <RepositoryListContainer
@@ -87,6 +81,7 @@ const RepositoryList = () => {
       setOrder={setOrder}
       searchKeyword={searchKeyword}
       setSearchKeyword={setSearchKeyword}
+      onEndReach={onEndReach}
     />
   )
 }

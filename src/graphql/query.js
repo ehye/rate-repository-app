@@ -5,11 +5,15 @@ export const GET_REPOSITORIES = gql`
     $orderBy: AllRepositoriesOrderBy
     $orderDirection: OrderDirection
     $searchKeyword: String
+    $first: Int
+    $after: String
   ) {
     repositories(
       orderBy: $orderBy
       orderDirection: $orderDirection
       searchKeyword: $searchKeyword
+      first: $first
+      after: $after
     ) {
       edges {
         node {
@@ -82,11 +86,12 @@ export const SIGN_IN = gql`
 `
 
 export const GET_CURRENT_USER = gql`
-  query ($includeReviews: Boolean = false) {
+  query Me($includeReviews: Boolean = false, $first: Int, $after: String) {
     me {
       id
       username
-      reviews @include(if: $includeReviews) {
+      reviews(first: $first, after: $after) @include(if: $includeReviews) {
+        totalCount
         edges {
           node {
             id
@@ -104,7 +109,14 @@ export const GET_CURRENT_USER = gql`
             }
           }
         }
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          startCursor
+          endCursor
+        }
       }
+      reviewCount
     }
   }
 `

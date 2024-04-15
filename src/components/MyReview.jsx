@@ -114,15 +114,18 @@ const MyReviewItem = ({ review, refetch }) => {
 }
 
 const MyReview = () => {
-  const { data, loading, refetch } = useMyReviews()
+  const { reviews, loading, refetch, fetchMore } = useMyReviews({ first: 7 })
 
   if (loading) {
     return <Text>loading...</Text>
   }
-  if (!loading && data.me.reviews) {
-    const reviewNodes = data.me.reviews
-      ? data.me.reviews.edges.map((edge) => edge.node)
-      : []
+
+  if (!loading && reviews) {
+    const reviewNodes = reviews ? reviews.edges.map((edge) => edge.node) : []
+    const onEndReach = () => {
+      // console.log('You have reached the end of the list')
+      fetchMore()
+    }
 
     return (
       <FlatList
@@ -131,6 +134,8 @@ const MyReview = () => {
         renderItem={({ item: review }) => (
           <MyReviewItem review={review} refetch={refetch} />
         )}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     )
   }
