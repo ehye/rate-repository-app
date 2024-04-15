@@ -96,6 +96,7 @@ export const GET_CURRENT_USER = gql`
             text
             repository {
               name
+              url
             }
             user {
               id

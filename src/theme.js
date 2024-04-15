@@ -1,10 +1,12 @@
 const primary = '#0366d6'
+const danger = '#d73a4a'
 
 const theme = {
   colors: {
     textPrimary: '#24292e',
     textSecondary: '#586069',
     primary: primary,
+    danger: danger,
   },
   fontSizes: {
     body: 14,
@@ -35,7 +37,7 @@ const theme = {
     borderRadius: 5,
   },
   inputError: {
-    color: '#d73a4a',
+    color: danger,
     marginLeft: '30px',
   },
   rating: {
